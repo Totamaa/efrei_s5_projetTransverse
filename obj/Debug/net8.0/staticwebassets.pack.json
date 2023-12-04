@@ -1,0 +1,33 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\calde\\OneDrive\\Documents\\travail\\cours\\efrei\\l3\\s5\\Projet\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\calde\\OneDrive\\Documents\\travail\\cours\\efrei\\l3\\s5\\Projet\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\calde\\OneDrive\\Documents\\travail\\cours\\efrei\\l3\\s5\\Projet\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Projet.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Projet.props",
+      "PackagePath": "build\\Projet.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Projet.props",
+      "PackagePath": "buildMultiTargeting\\Projet.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Projet.props",
+      "PackagePath": "buildTransitive\\Projet.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

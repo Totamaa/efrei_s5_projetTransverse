@@ -36,5 +36,10 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
+  },
+  "runtimeOptions": {
+    "configProperties": {
+       "System.Globalization.Invariant": false
+    }
   }
 }

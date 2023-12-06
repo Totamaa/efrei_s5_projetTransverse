@@ -7,14 +7,14 @@ namespace Projet.Models.Entity
     {
         [ForeignKey("DossierEntity")]
         [Required]
-        public Guid DossierId { get; set; }
+        public int DossierId { get; set; }
 
         [ForeignKey("TypePreuveEntity")]
         [Required]
-        public Guid TypePreuveId { get; set; }
+        public int TypePreuveId { get; set; }
 
         [Required]
-        public string? Contenu { get; set; } // URL ou texte
+        public string Contenu { get; set; } // URL ou texte
 
         // Navigation property
         public virtual DossierEntity? DossierEntity { get; set; }

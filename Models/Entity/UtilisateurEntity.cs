@@ -5,10 +5,10 @@ namespace Projet.Models.Entity;
 public class UtilisateurEntity : BaseEntity
 {
     [Required]
-    public string? Pseudo { get; set; }
+    public string Pseudo { get; set; }
 
     [Required]
-    public string? MotDePasse { get; set; }
+    public string MotDePasse { get; set; }
 
     public bool IsAdmin { get; set; }
 

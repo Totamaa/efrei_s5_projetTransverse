@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Projet.Models.Entity
 {
-    public class Preuve : BaseEntity
+    public class PreuveEntity : BaseEntity
     {
         [ForeignKey("DossierEntity")]
         [Required]
@@ -13,10 +13,8 @@ namespace Projet.Models.Entity
         [Required]
         public int TypePreuveId { get; set; }
 
-        [Required]
-        public string Contenu { get; set; } // URL ou texte
+        public string? Contenu { get; set; }
 
-        // Navigation property
         public virtual DossierEntity? DossierEntity { get; set; }
 
         public virtual TypePreuveEntity? TypePreuveEntity { get; set; }

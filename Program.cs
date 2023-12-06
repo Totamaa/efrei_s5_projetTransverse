@@ -1,13 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using Projet.Models.Context;
-using Pomelo.EntityFrameworkCore.MySql;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Projet.Services.Interfaces;
+using Projet.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+/***** Gestion des tokens JWT *****/
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -24,18 +26,24 @@ builder.Services.AddAuthentication(options =>
     };
 });
 
+/***** Gestions des services *****/
+builder.Services.AddScoped<IUtilisateurService, UtilisateurService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+/***** Gestion des controllers *****/
 builder.Services.AddControllers();
 
+/****** Gestion de la connexion à la base de données *****/
 builder.Services.AddDbContext<MySqlContext>(opt => 
     opt.UseMySql(builder.Configuration.GetConnectionString("DefaultConnection"),
     ServerVersion.AutoDetect(builder.Configuration.GetConnectionString("DefaultConnection"))));
 
+/***** Gestion de la documentation *****/
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

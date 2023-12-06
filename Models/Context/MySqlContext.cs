@@ -10,7 +10,7 @@ public class MySqlContext : DbContext
     public DbSet<UtilisateurEntity> Utilisateurs { get; set; }
     public DbSet<CyberharceleurEntity> Cyberharceleurs { get; set; }
     public DbSet<DossierEntity> Dossiers { get; set; }
-    public DbSet<Preuve> Preuves { get; set; }
+    public DbSet<PreuveEntity> Preuves { get; set; }
     public DbSet<TypePreuveEntity> TypePreuves { get; set; }
     
 

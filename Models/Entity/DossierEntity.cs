@@ -15,6 +15,6 @@ public class DossierEntity : BaseEntity
 
     public virtual UtilisateurEntity? UtilisateurEntity { get; set; }
     public virtual CyberharceleurEntity? CyberharceleurEntity { get; set; }
-    public virtual IList<Preuve>? Preuves { get; set; }
+    public virtual IList<PreuveEntity>? Preuves { get; set; }
     
 }

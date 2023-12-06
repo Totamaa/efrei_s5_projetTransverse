@@ -1,110 +1,63 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Projet.Models.Context;
-using Projet.Models.Entity;
+using Projet.Models.DTO.Request;
+using Projet.Models.DTO.Response;
+using Projet.Services.Interfaces;
 
 namespace Projet.Controllers
 {
     [Route("api/[controller]")]
-    [Authorize]
     [ApiController]
     public class UtilisateurController : ControllerBase
     {
-        private readonly MySqlContext _context;
+        private readonly IUtilisateurService _utilisateurService;
 
-        public UtilisateurController(MySqlContext context)
+        public UtilisateurController(
+            IUtilisateurService utilisateurService
+        )
         {
-            _context = context;
+            _utilisateurService = utilisateurService;
         }
 
-        // GET: api/Utilisateur
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<UtilisateurEntity>>> GetUtilisateurs()
+        [HttpPost("inscription")]
+        public async Task<ActionResult<int>> InscriptionUtilisateur([FromQuery] UtilisateurRequest utilisateurRequest)
         {
-            return await _context.Utilisateurs.ToListAsync();
+            int utilisateurId;
+            try{
+                utilisateurId = await _utilisateurService.InscriptionUtilisateur(utilisateurRequest);
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest(e.Message);
+            }
+            catch (InvalidOperationException e)
+            {
+                return Conflict(e.Message);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+
+            return CreatedAtAction(nameof(GetUtilisateurById), new {id = utilisateurId}, utilisateurId);
         }
 
-        // GET: api/Utilisateur/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<UtilisateurEntity>> GetUtilisateurEntity(int id)
+        public async Task<ActionResult<UtilisateurResponse>> GetUtilisateurById([FromRoute] int id)
         {
-            var utilisateurEntity = await _context.Utilisateurs.FindAsync(id);
-
-            if (utilisateurEntity == null)
-            {
-                return NotFound();
-            }
-
-            return utilisateurEntity;
-        }
-
-        // PUT: api/Utilisateur/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutUtilisateurEntity(int id, UtilisateurEntity utilisateurEntity)
-        {
-            if (id != utilisateurEntity.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(utilisateurEntity).State = EntityState.Modified;
-
+            UtilisateurResponse utilisateur;
             try
             {
-                await _context.SaveChangesAsync();
+                utilisateur = await _utilisateurService.GetUtilisateurById(id);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (KeyNotFoundException e)
             {
-                if (!UtilisateurEntityExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound(e.Message);
             }
-
-            return NoContent();
-        }
-
-        // POST: api/Utilisateur
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPost]
-        public async Task<ActionResult<UtilisateurEntity>> PostUtilisateurEntity(UtilisateurEntity utilisateurEntity)
-        {
-            _context.Utilisateurs.Add(utilisateurEntity);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetUtilisateurEntity", new { id = utilisateurEntity.Id }, utilisateurEntity);
-        }
-
-        // DELETE: api/Utilisateur/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteUtilisateurEntity(int id)
-        {
-            var utilisateurEntity = await _context.Utilisateurs.FindAsync(id);
-            if (utilisateurEntity == null)
+            catch (Exception e)
             {
-                return NotFound();
+                return StatusCode(500, e.Message);
             }
-
-            _context.Utilisateurs.Remove(utilisateurEntity);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool UtilisateurEntityExists(int id)
-        {
-            return _context.Utilisateurs.Any(e => e.Id == id);
+            return Ok(utilisateur);
         }
     }
 }

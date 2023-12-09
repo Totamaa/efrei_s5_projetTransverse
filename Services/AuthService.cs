@@ -10,15 +10,15 @@ namespace Projet.Services;
 public class AuthService : IAuthService
 {
     private readonly MySqlContext _context;
-    private readonly IUtilisateurService _utilisateurService;
+    private readonly IUtilisateurBusinessService _utilisateurBusinessService;
 
     public AuthService(
         MySqlContext context,
-        IUtilisateurService utilisateurService
+        IUtilisateurBusinessService utilisateurBusinessService
     )
     {
         _context = context;
-        _utilisateurService = utilisateurService;
+        _utilisateurBusinessService = utilisateurBusinessService;
     }
 
     /// <summary>
@@ -34,7 +34,7 @@ public class AuthService : IAuthService
             throw new ArgumentException("Pseudo et mot de passe sont requis");
         }
 
-        UtilisateurEntity utilisateur = await _utilisateurService.GetFullUtilisateurByPseudo(utilisateurRequest.Pseudo);
+        UtilisateurEntity utilisateur = await _utilisateurBusinessService.GetFullUtilisateurByPseudo(utilisateurRequest.Pseudo);
 
         if (utilisateur.MotDePasse == utilisateurRequest.MotDePasse)
         {

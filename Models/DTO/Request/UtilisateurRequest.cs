@@ -5,9 +5,9 @@ namespace Projet.Models.DTO.Request;
 
 public class UtilisateurRequest
 {
-    public string Pseudo { get; set; }
+    public string? Pseudo { get; set; }
 
-    public string MotDePasse { get; set; }
+    public string? MotDePasse { get; set; }
 
     static public UtilisateurEntity ToEntity(UtilisateurRequest utilisateurRequest)
     {

@@ -9,21 +9,21 @@ namespace Projet.Controllers
     [ApiController]
     public class UtilisateurController : ControllerBase
     {
-        private readonly IUtilisateurService _utilisateurService;
+        private readonly IUtilisateurBusinessService _utilisateurBusinessService;
 
         public UtilisateurController(
-            IUtilisateurService utilisateurService
+            IUtilisateurBusinessService utilisateurBusinessService
         )
         {
-            _utilisateurService = utilisateurService;
+            _utilisateurBusinessService = utilisateurBusinessService;
         }
 
         [HttpPost("inscription")]
-        public async Task<ActionResult<int>> InscriptionUtilisateur([FromQuery] UtilisateurRequest utilisateurRequest)
+        public async Task<ActionResult<int>> InscriptionUtilisateur([FromBody] UtilisateurRequest utilisateurRequest)
         {
             int utilisateurId;
             try{
-                utilisateurId = await _utilisateurService.InscriptionUtilisateur(utilisateurRequest);
+                utilisateurId = await _utilisateurBusinessService.InscriptionUtilisateur(utilisateurRequest);
             }
             catch (ArgumentException e)
             {
@@ -42,12 +42,12 @@ namespace Projet.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<UtilisateurResponse>> GetUtilisateurById([FromRoute] int id)
+        public async Task<ActionResult<UtilisateurResponse>> GetUtilisateurById([FromRoute] int? id)
         {
             UtilisateurResponse utilisateur;
             try
             {
-                utilisateur = await _utilisateurService.GetUtilisateurById(id);
+                utilisateur = await _utilisateurBusinessService.GetUtilisateurById(id);
             }
             catch (KeyNotFoundException e)
             {
@@ -58,6 +58,50 @@ namespace Projet.Controllers
                 return StatusCode(500, e.Message);
             }
             return Ok(utilisateur);
+        }
+
+        [HttpPatch("changePseudo")]
+        public async Task<ActionResult> UpdateUtilisateurPseudoById([FromBody] ChangeUtilisateurPseudoRequest changeUtilisateurPseudoRequest)
+        {
+            try
+            {
+                await _utilisateurBusinessService.UpdateUtilisateurPseudoById(changeUtilisateurPseudoRequest);
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest(e.Message);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteUtilisateurById([FromRoute] int? id)
+        {
+            try
+            {
+                await _utilisateurBusinessService.DeleteUtilisateurById(id);
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest(e.Message);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+            return NoContent();
         }
     }
 }

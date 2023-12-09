@@ -7,11 +7,11 @@ using Projet.Services.Interfaces;
 
 namespace Projet.Services;
 
-public class UtilisateurService : IUtilisateurService
+public class UtilisateurBusinessService : IUtilisateurBusinessService
 {
     private readonly MySqlContext _context;
 
-    public UtilisateurService(MySqlContext context)
+    public UtilisateurBusinessService(MySqlContext context)
     {
         _context = context;
     }
@@ -50,7 +50,7 @@ public class UtilisateurService : IUtilisateurService
     /// <param name="pseudo"></param>
     /// <returns></returns>
     /// <exception cref="ArgumentException"></exception>
-    public async Task<bool> IsPseudoLibre(string pseudo)
+    public async Task<bool> IsPseudoLibre(string? pseudo)
     {
         if (String.IsNullOrWhiteSpace(pseudo))
         {
@@ -67,8 +67,13 @@ public class UtilisateurService : IUtilisateurService
     /// <param name="id">l'id de l'utilisateur</param>
     /// <returns></returns>
     /// <exception cref="KeyNotFoundException"></exception>
-    public async Task<UtilisateurResponse> GetUtilisateurById(int id)
+    public async Task<UtilisateurResponse> GetUtilisateurById(int? id)
     {
+        if (id == null)
+        {
+            throw new ArgumentException("L'id de l'utilisateur est requis");
+        }
+
         var utilisateur = await _context.Utilisateurs.FindAsync(id);
 
         if (utilisateur == null)
@@ -79,8 +84,13 @@ public class UtilisateurService : IUtilisateurService
         return new UtilisateurResponse(utilisateur);
     }
 
-    public async Task<UtilisateurResponse> GetUtilisateurByPseudo(string pseudo)
+    public async Task<UtilisateurResponse> GetUtilisateurByPseudo(string? pseudo)
     {
+        if (String.IsNullOrWhiteSpace(pseudo))
+        {
+            throw new ArgumentException("Le pseudo est requis");
+        }
+
         var utilisateur = await _context.Utilisateurs.FirstOrDefaultAsync(u => u.Pseudo == pseudo);
 
         if (utilisateur == null)
@@ -91,8 +101,13 @@ public class UtilisateurService : IUtilisateurService
         return new UtilisateurResponse(utilisateur);
     }
 
-    public async Task<UtilisateurEntity> GetFullUtilisateurByPseudo(string pseudo)
+    public async Task<UtilisateurEntity> GetFullUtilisateurByPseudo(string? pseudo)
     {
+        if (String.IsNullOrWhiteSpace(pseudo))
+        {
+            throw new ArgumentException("Le pseudo est requis");
+        }
+
         var utilisateur = await _context.Utilisateurs.FirstOrDefaultAsync(u => u.Pseudo == pseudo);
 
         if (utilisateur == null)
@@ -101,5 +116,46 @@ public class UtilisateurService : IUtilisateurService
         }
 
         return utilisateur;
+    }
+
+    public async Task<bool> DeleteUtilisateurById(int? id)
+    {
+        if (id == null)
+        {
+            throw new ArgumentException("L'id de l'utilisateur est requis");
+        }
+
+        var utilisateur = _context.Utilisateurs.Find(id);
+
+        if (utilisateur == null)
+        {
+            throw new KeyNotFoundException("L'utilisateur n'existe pas");
+        }
+
+        _context.Utilisateurs.Remove(utilisateur);
+        await _context.SaveChangesAsync();
+        
+        return true;
+    }
+
+    public async Task<bool> UpdateUtilisateurPseudoById(ChangeUtilisateurPseudoRequest changeUtilisateurPseudoRequest)
+    {
+        if (changeUtilisateurPseudoRequest.UtilisateurId == null || String.IsNullOrWhiteSpace(changeUtilisateurPseudoRequest.NewPseudo))
+        {
+            throw new ArgumentException("L'id de l'utilisateur et le nouveau pseudo sont requis");
+        }
+
+        var utilisateur = _context.Utilisateurs.Find(changeUtilisateurPseudoRequest.UtilisateurId);
+
+        if (utilisateur == null)
+        {
+            throw new KeyNotFoundException("L'utilisateur n'existe pas");
+        }
+
+        utilisateur.Pseudo = changeUtilisateurPseudoRequest.NewPseudo;
+        _context.Utilisateurs.Update(utilisateur);
+        await _context.SaveChangesAsync();
+        
+        return true;
     }
 }

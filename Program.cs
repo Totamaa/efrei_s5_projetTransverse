@@ -20,15 +20,16 @@ builder.Services.AddAuthentication(options =>
     options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuerSigningKey = true,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("VotreCléSecrète")),
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("secretKey")),
         ValidateIssuer = false,
         ValidateAudience = false
     };
 });
 
 /***** Gestions des services *****/
-builder.Services.AddScoped<IUtilisateurService, UtilisateurService>();
+builder.Services.AddScoped<IUtilisateurBusinessService, UtilisateurBusinessService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IDossierBusinessService, DossierBusinessService>();
 
 /***** Gestion des controllers *****/
 builder.Services.AddControllers();

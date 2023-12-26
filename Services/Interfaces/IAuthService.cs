@@ -6,4 +6,5 @@ namespace Projet.Services.Interfaces;
 public interface IAuthService
 {
     Task<bool> ConnexionUtilisateur(UtilisateurRequest utilisateurRequest);
+    Task<bool> IsAdmin(int? idUtilisateur);
 }

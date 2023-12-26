@@ -46,4 +46,14 @@ public class AuthService : IAuthService
         }
 
     }
+
+    public Task<bool> IsAdmin(int? idUtilisateur)
+    {
+        if (idUtilisateur == null)
+        {
+            return Task.FromResult(false);
+        }
+
+        return _context.Utilisateurs.AnyAsync(u => u.Id == idUtilisateur && u.IsAdmin);
+    }
 }

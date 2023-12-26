@@ -57,5 +57,20 @@ namespace Projet.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpGet("isAdmin/{id}")]
+        public async Task<ActionResult<bool>> IsAdmin([FromRoute] int? id)
+        {
+            bool isAdmin;
+            try
+            {
+                isAdmin = await _authService.IsAdmin(id);
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+            return Ok(isAdmin);
+        }
     }
 }

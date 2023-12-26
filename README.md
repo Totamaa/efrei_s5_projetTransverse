@@ -22,3 +22,5 @@ Ce projet est un site web conçu pour une association qui se consacre à l'aide 
 ## IV. Contributeur
 
 - [Matteo Calderaro](https://github.com/Totamaa)
+- Sugeetha
+- Elias

@@ -38,7 +38,7 @@ namespace Projet.Controllers
                 return StatusCode(500, e.Message);
             }
 
-            return CreatedAtAction(nameof(GetUtilisateurById), new {id = utilisateurId}, utilisateurId);
+            return CreatedAtAction(nameof(GetUtilisateurById), new {id = utilisateurId}, null);
         }
 
         [HttpGet("{id}")]
@@ -48,6 +48,10 @@ namespace Projet.Controllers
             try
             {
                 utilisateur = await _utilisateurBusinessService.GetUtilisateurById(id);
+            }
+            catch (ArgumentException e)
+            {
+                return BadRequest(e.Message);
             }
             catch (KeyNotFoundException e)
             {

@@ -2,14 +2,11 @@ using Projet.Models.Entity;
 
 namespace Projet.Models.DTO.Response;
 
-public class DossierResponse
+public class DossierResponse(DossierEntity d)
 {
-    public int Id { get; set; }
-    
-    public DossierResponse(DossierEntity d)
-    {
-        d.Id = Id;
-    }
+    public int Id { get; set; } = d.Id;
+    public DateTime CreatedAt { get; set; } = d.CreatedAt;
+
 
     public static IList<DossierResponse> ToListDossierResponse(List<DossierEntity> dossiers)
     {

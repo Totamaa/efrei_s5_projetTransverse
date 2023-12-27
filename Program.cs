@@ -31,6 +31,7 @@ builder.Services.AddScoped<IUtilisateurBusinessService, UtilisateurBusinessServi
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IDossierBusinessService, DossierBusinessService>();
 builder.Services.AddScoped<ITypePreuveBusinessService, TypePreuveBusinessService>();
+builder.Services.AddScoped<IPreuveBusinessService, PreuveBusinessService>();
 
 /***** Gestion des controllers *****/
 builder.Services.AddControllers();

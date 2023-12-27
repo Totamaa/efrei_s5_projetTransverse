@@ -19,10 +19,10 @@ namespace Projet.Controllers
     [ApiController]
     public class TypePreuveController : ControllerBase
     {
-        private readonly TypePreuveBusinessService _typePreuveBusinessService;
+        private readonly ITypePreuveBusinessService _typePreuveBusinessService;
 
         public TypePreuveController(
-            TypePreuveBusinessService typePreuveBusinessService
+            ITypePreuveBusinessService typePreuveBusinessService
         )
         {
             _typePreuveBusinessService = typePreuveBusinessService;

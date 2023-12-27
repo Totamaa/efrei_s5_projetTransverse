@@ -40,17 +40,17 @@ namespace Projet.Services.Interfaces
             return true;
         }
 
-        public async Task<IList<DossierResponse>> GetAllLastDossiers(int from=0, int to=20)
+        public async Task<IList<DossierResponse>> GetAllLastDossiers(int from=0, int nb=20)
         {
-            if (from < 0 || to < 0)
+            if (from < 0 || nb < 0)
             {
                 throw new ArgumentException("Les paramètres from et to doivent être positifs");
             }
-            if (from > to)
-            {
-                throw new ArgumentException("Le paramètre from doit être inférieur au paramètre to");
-            }
-            var dossiers = await _context.Dossiers.OrderByDescending(d => d.CreatedAt).Skip(from).Take(to).ToListAsync();
+            var dossiers = await _context.Dossiers
+                .OrderByDescending(d => d.CreatedAt)
+                .Skip(from)
+                .Take(nb)
+                .ToListAsync();
             return DossierResponse.ToListDossierResponse(dossiers);
         }
 

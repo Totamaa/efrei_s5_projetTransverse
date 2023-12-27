@@ -9,5 +9,5 @@ public interface IDossierBusinessService
     Task<DossierResponse> GetDossierById(int? id);
     Task<IList<DossierResponse>> GetDossierByUtilisateurId(int? utilisateurId);
     Task<bool> DeleteDossierById(int? id);
-    Task<IList<DossierResponse>> GetAllLastDossiers(int from = 0, int to = 20);
+    Task<IList<DossierResponse>> GetAllLastDossiers(int from = 0, int nb = 20);
 }

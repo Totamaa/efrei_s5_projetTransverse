@@ -13,8 +13,8 @@ public class UtilisateurRequest
     {
         return new UtilisateurEntity
         {
-            Pseudo = utilisateurRequest.Pseudo,
-            MotDePasse = utilisateurRequest.MotDePasse,
+            Pseudo = utilisateurRequest.Pseudo!,
+            MotDePasse = utilisateurRequest.MotDePasse!,
             IsAdmin = false
         };
     }

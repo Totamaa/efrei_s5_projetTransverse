@@ -8,13 +8,13 @@ public class CreatePreuveRequest
     public int? TypePreuveId;
     public string? Contenu;
 
-    static public CreatePreuveRequest ToEntity(PreuveEntity preuveEntity)
+    public PreuveEntity ToEntity()
     {
-        return new CreatePreuveRequest
+        return new PreuveEntity
         {
-            DossierId = preuveEntity.DossierId,
-            TypePreuveId = preuveEntity.TypePreuveId,
-            Contenu = preuveEntity.Contenu
+            DossierId = (int)DossierId!,
+            TypePreuveId = (int)TypePreuveId!,
+            Contenu = Contenu
         };
     }
 }

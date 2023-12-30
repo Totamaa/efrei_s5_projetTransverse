@@ -1,0 +1,225 @@
+<?php include('serveur.php') ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sondage</title>
+  <!--Fichiers CSS-->
+  <link rel="stylesheet" type="text/css" href="CSS/style.css"> 
+  <link rel="stylesheet" type="text/css" href="CSS/styleSondage.css"> 
+  <!--Bootstrap & Animation CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <!-- Pour les icons du footer -->
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+  <!--Fichiers Js-->
+  <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+	<script src="./js/sondage.js"></script>
+</head>
+
+<body>
+	<header>
+		<!-- Menu pour les petits écrans -->
+		<div class="header1">
+			<h1>Le sondage des élèves</h1>
+  		<input class="menu-btn" type="checkbox" id="menu-btn" />
+  		<label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+  		<ul class="menu">
+    		<li><a href="commentcamarche.html">Comment ça marche</a></li>
+    		<li><a href="protectionDesDonnees.html">Protection des Données</a></li>
+    		<li><a href="faqs.html">FAQs</a></li>
+    		<li><a href="sondage.php">Sondage</a></li>
+  		</ul>
+  	</div>
+
+  	<!-- Menu pour les grands écrans -->
+		<div id="header2">
+			<img id="logo" src="image/logoSiteWeb.png">
+ 			<nav class="navMenu">
+    		<a class="Na1" href="commentcamarche.html">Comment ça marche</a>
+    		<a class="Na2" href="protectionDesDonnees.html">Protection des Données</a>
+    		<a class="Na3" href="faqs.html">FAQs</a>
+    		<a class="Na4" href="sondage.php">Sondage</a>
+    		<!-- Définir un point pour une animation de survol -->
+    		<div class="dot"></div> 
+    	</nav>
+    </div>
+	</header>
+
+	<section id="SONDAGE">
+		<div class="s-name">
+      <h2>Le sondage alimentaire <br>des élèves</h2>
+      <span class="small-line"></span>
+    </div>
+		<form method="post" action="sondage.php">
+    	<h3 class="animate__animated animate__slideInUp" id="titre">Qui êtes-vous ?</h3>
+    	<div class="div1">
+	      <div class="input-group">
+	        <label>Nom</label>
+	        <input type="text" name="nom" value="<?php echo $nom; ?>">
+	      </div>
+	      <div class="input-group">
+	        <label>Prenom</label>
+	        <input type="text" name="prenom" value="<?php echo $prenom; ?>">
+	      </div>
+	      <div class="input-group">
+	        <label>Age</label>
+	        <input type="text" name="age" value="<?php echo $age; ?>">
+	      </div>
+	      <div class="input-group">
+	        <label>Classe</label>
+	        <input type="text" name="classe" value="<?php echo $classe; ?>">
+	      </div>
+	      <div class="input-group">
+	        <label>Etablissement</label>
+	        <input type="text" name="etablissement" value="<?php echo $etablissement; ?>">
+	      </div>
+	      <div class="input-group">
+	        <label>Enseignant</label>
+	        <input type="text" name="enseignant" value="<?php echo $enseignant; ?>">
+	      </div>
+  		</div>
+
+	    <h3 class="animate__animated animate__slideInUp" id="h">Consommez-vous souvent au petit déjeuner ?</h3>
+			<div class="div2">
+	    	<h4 id="h">Aliment 1</h4>
+				<div class="div3">
+					<div class="input-group">
+						<label>Groupe d'aliment :</label>
+						<select id="select11" name="g1"></select>
+					</div>
+					<div class="input-group">
+						<label>Sous-groupe d'aliment :</label>
+						<select id="select12" name="sg1"></select>
+					</div>			
+					<div class="input-group">
+						<label>Aliment consommé :</label>
+						<select id="select13" name="a1"></select>
+					</div>
+				</div>
+				<h4>Aliment 2</h4>
+				<div class="div3">
+					<div class="input-group">
+						<label for="select21">Groupe d'aliment :</label>
+						<select id="select21" name="g2"></select>
+					</div>
+					<div class="input-group">
+						<label>Sous-groupe d'aliment :</label>
+						<select id="select22" name="sg2"></select>
+					</div>
+					<div class="input-group">
+						<label>Aliment consommé :</label>
+						<select id="select23" name="a2"></select>
+				 	</div>
+				</div>
+				<h4>Aliment 3</h4>
+				<div class="div3">
+					<div class="input-group">
+						<label>Groupe d'aliment :</label>
+						<select id="select31" name="g3"></select>
+					</div>
+					<div class="input-group">
+						<label for="select32">Sous-groupe d'aliment :</label>
+						<select id="select32" name="sg3"></select>
+					</div>
+					<div class="input-group">
+						<label for="select33">Aliment consommé :</label>
+						<select id="select33" name="a3"></select>
+					</div>
+				</div>
+			</div>
+
+			<h3 class="animate__animated animate__slideInUp">Consommez-vous souvent au dîner ?</h3>
+			<div class="div2">
+				<h4>Aliment 4</h4>
+				<div class="div3">
+					<div class="input-group">
+						<label>Groupe d'aliment :</label>
+						<select id="select41" name="g4"></select>
+					</div>
+					<div class="input-group">
+						<label>Sous-groupe d'aliment :</label>
+						<select id="select42" name="sg4"></select>
+					</div>
+					<div class="input-group">
+						<label>Aliment consommé :</label>
+						<select id="select43" name="a4"></select>
+					</div>
+				</div>
+
+				<h4>Aliment 5</h4>
+				<div class="div3">
+					<div class="input-group">
+						<label>Groupe d'aliment :</label>
+						<select id="select51" name="g5"></select>
+					</div>
+					<div class="input-group">
+						<label>Sous-groupe d'aliment :</label>
+						<select id="select52" name="sg5"></select>
+					</div>
+					<div class="input-group">
+						<label>Aliment consommé :</label>
+						<select id="select53" name="a5"></select>
+					</div>
+				</div>
+
+				<h4>Aliment 6</h4>
+				<div class="div3">
+					<div class="input-group">
+						<label>Groupe d'aliment :</label>
+						<select id="select61" name="g6"></select>
+					</div>
+					<div class="input-group">
+					<label>Sous-groupe d'aliment :</label>
+					<select id="select62" name="sg6"></select>
+					</div>
+					<div class="input-group">
+					<label>Aliment consommé :</label>
+					<select id="select63" name="a6"></select>
+					</div>
+				</div>
+			</div>
+      
+      <button type="submit" class="btn" name="reg_user">Enregistrer</button>
+		</form>   
+	</section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="footer-col">
+          <h4>Liens rapides</h4>
+          <ul>
+            <li><a href="commentcamarche.html">Comment Ça Marche</a></li>
+            <li><a href="protectionDesDonnees.html">Protection Des Données</a></li>
+            <li><a href="faqs.html">FAQs</a></li>
+            <li><a href="sondage.php">Sondage</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact</h4>
+          <ul>
+            <li><a><strong>Mail</strong>: SondageDesEleves@hotmail.com</a></li>
+            <li><a><strong>Adresse</strong>: 143 Av. de Versailles,75016 Paris</a></li>
+            <li><a><strong>Téléphone</strong>: 09 90 90 90 90</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Rejoignez-nous</h4>
+          <div class="social-links">
+            <a href="https://fr-fr.facebook.com/"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com/"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.linkedin.com/"><i class="fab fa-linkedin-in"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="CopyRight">
+      <span><sup>&copy;</sup>CopyRight Le Sondage Des Élèves - Tous les droits réservés | Création IUT Paris Cité | Mentions Légales</span>
+    </div>
+  </footer>
+</body>
+</html>

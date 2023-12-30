@@ -1,7 +1,9 @@
 namespace Projet.Models.DTO.Request
 {
-    public class CreateDossierRequest
+    public class CreateDossierRequest(
+        int utilisateurId
+    )
     {
-        public int? UtilisateurId { get; set; }
+        public int UtilisateurId { get; set; } = utilisateurId;
     }
 }

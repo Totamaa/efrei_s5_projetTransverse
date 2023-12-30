@@ -9,7 +9,7 @@ public class PreuveAndTypeResponse(PreuveEntity p)
     public DateTime CreatedAt { get; set; } = p.CreatedAt;
     public DateTime ModifiedAt { get; set; } = p.ModifiedAt;
     public int TypePreuveId { get; set; } = p.TypePreuveEntity!.Id;
-    public string? TypePreuveNom { get; set; } = p.TypePreuveEntity!.Nom;
+    public string TypePreuveNom { get; set; } = p.TypePreuveEntity!.Nom;
 
     public static IList<PreuveAndTypeResponse> ToListPreuveAndTypeResponse(List<PreuveEntity> preuves)
     {

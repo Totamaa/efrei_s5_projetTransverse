@@ -3,19 +3,20 @@ using Projet.Models.Entity;
 
 namespace Projet.Models.DTO.Request;
 
-public class UtilisateurRequest
+public class UtilisateurRequest(
+    string pseudo,
+    string motDePasse
+)
 {
-    public string? Pseudo { get; set; }
+    public string Pseudo { get; set; } = pseudo;
 
-    public string? MotDePasse { get; set; }
+    public string MotDePasse { get; set; } = motDePasse;
 
     static public UtilisateurEntity ToEntity(UtilisateurRequest utilisateurRequest)
     {
-        return new UtilisateurEntity
-        {
-            Pseudo = utilisateurRequest.Pseudo!,
-            MotDePasse = utilisateurRequest.MotDePasse!,
-            IsAdmin = false
-        };
+        return new UtilisateurEntity(
+            utilisateurRequest.Pseudo,
+            utilisateurRequest.MotDePasse
+        );
     }
 }

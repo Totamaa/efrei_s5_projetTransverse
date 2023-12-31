@@ -7,16 +7,13 @@ namespace Projet.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UtilisateurController : ControllerBase
+    public class UtilisateurController(
+        IUtilisateurBusinessService utilisateurBusinessService
+    ) : ControllerBase
     {
-        private readonly IUtilisateurBusinessService _utilisateurBusinessService;
+        private readonly IUtilisateurBusinessService _utilisateurBusinessService = utilisateurBusinessService;
 
-        public UtilisateurController(
-            IUtilisateurBusinessService utilisateurBusinessService
-        )
-        {
-            _utilisateurBusinessService = utilisateurBusinessService;
-        }
+        #region POST
 
         [HttpPost("inscription")]
         public async Task<ActionResult<int>> InscriptionUtilisateur([FromBody] UtilisateurRequest utilisateurRequest)
@@ -41,8 +38,12 @@ namespace Projet.Controllers
             return CreatedAtAction(nameof(GetUtilisateurById), new {id = utilisateurId}, null);
         }
 
+        #endregion
+        
+        #region GET
+
         [HttpGet("{id}")]
-        public async Task<ActionResult<UtilisateurResponse>> GetUtilisateurById([FromRoute] int? id)
+        public async Task<ActionResult<UtilisateurResponse>> GetUtilisateurById([FromRoute] int id)
         {
             UtilisateurResponse utilisateur;
             try
@@ -63,6 +64,10 @@ namespace Projet.Controllers
             }
             return Ok(utilisateur);
         }
+
+        #endregion
+
+        #region PATCH
 
         [HttpPatch("changePseudo")]
         public async Task<ActionResult> UpdateUtilisateurPseudoById([FromBody] ChangeUtilisateurPseudoRequest changeUtilisateurPseudoRequest)
@@ -86,8 +91,12 @@ namespace Projet.Controllers
             return NoContent();
         }
 
+        #endregion
+
+        #region DELETE	
+
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteUtilisateurById([FromRoute] int? id)
+        public async Task<ActionResult> DeleteUtilisateurById([FromRoute] int id)
         {
             try
             {
@@ -107,5 +116,8 @@ namespace Projet.Controllers
             }
             return NoContent();
         }
+    
+
+        #endregion
     }
 }

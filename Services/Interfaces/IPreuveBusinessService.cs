@@ -7,10 +7,12 @@ namespace Projet.Services.Interfaces;
 public interface IPreuveBusinessService
 {
 
-    /***** CREATE *****/
+    #region CREATE
     Task<int> CreatePreuve(CreatePreuveRequest createPreuveRequest);
 
-    /***** GET *****/
+    #endregion
+
+    #region GET
     Task<PreuveResponse> GetPreuveById(int? id);
     Task<PreuveAndTypeResponse> GetPreuveAndTypeById(int? id);
     Task<IList<PreuveResponse>> GetPreuveByDossierId(int? dossierId);
@@ -19,9 +21,15 @@ public interface IPreuveBusinessService
     Task<IList<PreuveResponse>> GetAllLastPreuves(int from = 0, int nb = 20);
     Task<IList<PreuveAndTypeResponse>> GetAllLastPreuvesAndType(int from = 0, int nb = 20);
 
-    /***** UPDATE *****/
+    #endregion
+
+    #region UPDATE
     Task<bool> UpdatePreuveContenu(int? id, string? nouveauContenu);
 
-    /***** DELETE *****/
+    #endregion
+
+    #region DELETE
     Task<bool> DeletePreuveById(int? id);
+
+    #endregion
 }

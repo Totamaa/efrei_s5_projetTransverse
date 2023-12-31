@@ -6,7 +6,7 @@ namespace Projet.Models.Entity
     public class PreuveEntity(
         int dossierId,
         int typePreuveId,
-        string? contenu = null
+        string contenu
     ) : BaseEntity
     {
         [ForeignKey("DossierEntity")]
@@ -17,7 +17,8 @@ namespace Projet.Models.Entity
         [Required]
         public int TypePreuveId { get; set; } = typePreuveId;
 
-        public string? Contenu { get; set; } = contenu;
+        [Required]
+        public string Contenu { get; set; } = contenu;
 
         public virtual DossierEntity? DossierEntity { get; set; }
 

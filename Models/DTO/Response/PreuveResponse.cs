@@ -5,7 +5,7 @@ namespace Projet.Models.DTO.Response;
 public class PreuveResponse(PreuveEntity p)
 {
     public int Id { get; set; } = p.Id;
-    public string? Contenu { get; set; } = p.Contenu;
+    public string Contenu { get; set; } = p.Contenu;
     public DateTime CreatedAt { get; set; } = p.CreatedAt;
     public DateTime ModifiedAt { get; set; } = p.ModifiedAt;
 

@@ -1,0 +1,201 @@
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+/*NAV : page active*/
+.navMenu .Na3{
+  color: #C59E1F;
+}
+
+#titre { 
+  position: absolute;
+  text-align: center;
+  padding-top: 20px;
+  left: 50%;
+  top: 50%;
+  color: ghostwhite;
+  font-family: Trebuchet MS;
+  font-size: 100px;
+  font-weight: bold;
+  text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
+  transform: translate(-50% ,-50%);
+} 
+.support-photo{
+  background-color: rgba(0, 0, 0, 0.527);
+}
+#background-photo{
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background-color: black;;
+  background-size: cover;
+  background-attachment: scroll;
+  z-index: -100;
+}
+
+h4 {
+  display: block;
+  font-size: 1.17em;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: bold;
+}
+
+.PARAGRAPHE, .PARAGRAPHE h3 {
+  display: flex;
+  min-height: 100%;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1e23;
+  color: #FFFFFF;
+}
+.s-name h3{
+  text-align: center;
+  font-family: 'Luminari',sans-serif;
+  font-weight: 700;
+  margin:80px 0px 18px 0px;
+}
+#trait1{
+  color: #FFF !important;
+}
+.small-line{
+  border:0.5px solid;
+  display: block;
+  margin: auto;
+  margin-bottom: 85px;
+  width: 75px;
+}
+.flexbox-col{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  min-height: 5vh;
+}
+
+.flexbox-col p{
+  font-size: 1.2em;
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.containeur {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-bottom: 130px;
+  width: 100%;
+  border: 1.5rem solid #fff;
+  border-radius: .5rem;
+  box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
+  height: 100%;
+  object-fit: cover;
+}
+
+.card {
+  position: relative;
+  max-width: 300px;
+  display: flex;
+  height: 400px;
+  width: 200px;
+  background-color: black !important;
+  /*mettre en blanc après*/
+  border-radius: 20%;
+  box-shadow: -1rem 0 3rem #000;
+  transition: 0.4s ease-out;
+  border-color: whitesmoke !important;
+  flex: 1 20 40rem;
+  object-fit: cover;
+}
+
+.card:not(:first-child) {
+  margin-left: -50px;
+}
+
+.card:hover {
+  transform: translateY(-20px);
+  transition: 0.4s ease-out;
+}
+
+.card:hover~.card {
+  position: relative;
+  left: 50px;
+  transition: 0.4s ease-out;
+}
+
+#tete {
+  position: relative;
+  max-width: 75%;
+  max-height: 70%;
+  border-radius: 50%;
+  padding-top: 5%;
+}
+
+.title {
+  color: white;
+  font-family: "Gill Sans", sans-serif;
+  font-weight: 300;
+  position: absolute;
+  left: 20px;
+  top: 15px;
+}
+
+.bar {
+  position: absolute;
+  top: 100px;
+  left: 20px;
+  height: 5px;
+  width: 150px;
+}
+
+.emptybar {
+  background-color: #2e3033;
+  width: 100%;
+  height: 100%;
+}
+
+.filledbar {
+  position: absolute;
+  top: 0px;
+  z-index: 3;
+  width: 0px;
+  height: 100%;
+  background: rgb(0, 154, 217);
+  background: linear-gradient(90deg, rgba(0, 154, 217, 1) 0%, rgba(217, 147, 0, 1) 65%, rgba(255, 186, 0, 1) 100%);
+  transition: 0.6s ease-out;
+}
+
+.card:hover .filledbar {
+  width: 120px;
+  transition: 0.4s ease-out;
+}
+
+.circle {
+  position: absolute;
+  top: 150px;
+  left: calc(50% - 60px);
+}
+
+/******Responsive******/
+
+@media (max-width: 1480px) {
+  #titre {
+    font-size: 4rem;
+  }
+
+  .card {
+    height: 335px;
+    width: 100px;
+  }
+
+  #tete {
+    max-width: 60%;
+    max-height: 55%;
+  }
+}

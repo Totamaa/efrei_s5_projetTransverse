@@ -3,20 +3,23 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Projet.Models.Entity
 {
-    public class Preuve : BaseEntity
+    public class PreuveEntity(
+        int dossierId,
+        int typePreuveId,
+        string contenu
+    ) : BaseEntity
     {
         [ForeignKey("DossierEntity")]
         [Required]
-        public int DossierId { get; set; }
+        public int DossierId { get; set; } = dossierId;
 
         [ForeignKey("TypePreuveEntity")]
         [Required]
-        public int TypePreuveId { get; set; }
+        public int TypePreuveId { get; set; } = typePreuveId;
 
         [Required]
-        public string Contenu { get; set; } // URL ou texte
+        public string Contenu { get; set; } = contenu;
 
-        // Navigation property
         public virtual DossierEntity? DossierEntity { get; set; }
 
         public virtual TypePreuveEntity? TypePreuveEntity { get; set; }

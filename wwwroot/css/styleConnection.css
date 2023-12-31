@@ -1,0 +1,105 @@
+*{
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+body{
+  background-color: lightgrey;
+}
+/*NAV : page active*/
+.navMenu .Na4{
+  color: #C59E1F;
+}
+/**** TITRE ****/
+.s-name h2{
+  font-size: 75px;
+  text-align: center;
+  font-family: 'Roboto',sans-serif;
+  font-weight: 700;
+  margin:80px 0px 18px 0px;
+  color: black;
+}
+.small-line{
+  border:0.5px solid black;
+  display: block;
+  margin: auto;
+  margin-bottom: 85px;
+  width: 75px;
+}
+
+/**** PARTIE QUESTIONNAIRE  ****/
+section{
+  text-align: center;
+  display: block;
+  margin-top: 10%;
+  z-index: -1;
+}
+section .input-group{
+  padding: 10px;
+}
+section .div1{
+  margin: auto;
+  width: 50%;
+  padding: 20px;
+  border: 3px solid green;
+}
+section .div2{
+  margin: auto;
+  width: 70%;
+  padding: 20px;
+  border: 3px solid green;
+}
+section .div3{
+  margin: auto;
+  width: 70%;
+  padding: 20px;
+  border: 3px solid black;
+}
+section select{
+  margin: auto;
+  width: 50%;
+}
+section label{
+  margin: auto;
+  width: 27%
+}
+form input{
+  margin: 0;
+  width: 40%;
+  margin-left: 5% !important;
+}
+form label{
+  margin-right: 0px !important;
+  margin-left: 20% !important;
+}
+.input-group{
+  background-color: #465048 !important;
+}
+.input-group label{
+  font-weight: bold;
+  color: white;
+}
+/**** PARTIE SOUS-TITRES DU QUESTIONNAIRE  ****/
+h3 {
+  margin: 20px;
+  padding-top: 25px;
+}
+
+h4{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+/**** PARTIE BOUTON DU QUESTIONNAIRE  ****/
+.btn {
+  width: 150px;
+  background-color: #449D3D !important;
+  color: white !important;
+  font-size: 20px;
+  box-shadow: 15px 15px 15px 5px rgba(78, 72, 77, 0.219);
+  border-top: 5px solid #122551;
+  border-radius: 0%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 10px;
+  margin-bottom: 50px;
+}

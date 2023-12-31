@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Projet.Models.DTO.Request;
 using Projet.Models.DTO.Response;
 using Projet.Services.Interfaces;
 
@@ -7,20 +6,21 @@ namespace Projet.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UtilisateurController(
-        IUtilisateurBusinessService utilisateurBusinessService
+    public class DossierController(
+        DossierBusinessService DossierBusinessService
     ) : ControllerBase
     {
-        private readonly IUtilisateurBusinessService _utilisateurBusinessService = utilisateurBusinessService;
+        private readonly DossierBusinessService _DossierBusinessService = DossierBusinessService;
 
         #region POST
 
-        [HttpPost("inscription")]
-        public async Task<ActionResult<int>> InscriptionUtilisateur([FromBody] UtilisateurRequest utilisateurRequest)
+        [HttpPost]
+        public async Task<ActionResult<int>> CreateDossier([FromQuery] int utilisateurId)
         {
-            int utilisateurId;
-            try{
-                utilisateurId = await _utilisateurBusinessService.InscriptionUtilisateur(utilisateurRequest);
+            int dossierId;
+            try
+            {
+                dossierId = await _DossierBusinessService.CreateDossier(utilisateurId);
             }
             catch (ArgumentException e)
             {
@@ -30,25 +30,29 @@ namespace Projet.Controllers
             {
                 return Conflict(e.Message);
             }
+            catch (NotImplementedException)
+            {
+                return StatusCode(501, "Not Implemented");
+            }
             catch (Exception e)
             {
                 return StatusCode(500, e.Message);
             }
 
-            return CreatedAtAction(nameof(GetUtilisateurById), new {id = utilisateurId}, null);
+            return CreatedAtAction(nameof(GetDossierById), new {id = dossierId}, dossierId);
         }
 
         #endregion
-        
+
         #region GET
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<UtilisateurResponse>> GetUtilisateurById([FromRoute] int id)
+        public async Task<ActionResult<DossierResponse>> GetDossierById([FromRoute] int id)
         {
-            UtilisateurResponse utilisateur;
+            DossierResponse dossier;
             try
             {
-                utilisateur = await _utilisateurBusinessService.GetUtilisateurById(id);
+                dossier = await _DossierBusinessService.GetDossierById(id);
             }
             catch (ArgumentException e)
             {
@@ -62,45 +66,38 @@ namespace Projet.Controllers
             {
                 return StatusCode(500, e.Message);
             }
-            return Ok(utilisateur);
+            return Ok(dossier);
         }
 
-        #endregion
-
-        #region PATCH
-
-        [HttpPatch("changePseudo")]
-        public async Task<ActionResult> UpdateUtilisateurPseudoById([FromBody] ChangeUtilisateurPseudoRequest changeUtilisateurPseudoRequest)
+        [HttpGet("all")]
+        public async Task<ActionResult<IList<DossierResponse>>> GetAllLastDossiers([FromQuery] int from = 0, [FromQuery] int to = 20)
         {
+            IList<DossierResponse> dossiers;
             try
             {
-                await _utilisateurBusinessService.UpdateUtilisateurPseudoById(changeUtilisateurPseudoRequest);
+                dossiers = await _DossierBusinessService.GetAllLastDossiers(from, to);
             }
             catch (ArgumentException e)
             {
                 return BadRequest(e.Message);
             }
-            catch (KeyNotFoundException e)
-            {
-                return NotFound(e.Message);
-            }
             catch (Exception e)
             {
                 return StatusCode(500, e.Message);
             }
-            return NoContent();
+            return Ok(dossiers);
         }
 
         #endregion
 
-        #region DELETE	
+        #region DELETE
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteUtilisateurById([FromRoute] int id)
+        public async Task<ActionResult> DeleteDossierById([FromRoute] int id)
         {
             try
             {
-                await _utilisateurBusinessService.DeleteUtilisateurById(id);
+                await _DossierBusinessService.DeleteDossierById(id);
             }
             catch (ArgumentException e)
             {
@@ -116,8 +113,8 @@ namespace Projet.Controllers
             }
             return NoContent();
         }
-    
 
         #endregion
+
     }
 }

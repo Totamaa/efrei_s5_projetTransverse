@@ -1,32 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Projet.Models.Context;
 using Projet.Models.DTO.Request;
-using Projet.Models.DTO.Response;
-using Projet.Models.Entity;
-using Projet.Services;
 using Projet.Services.Interfaces;
 
 namespace Projet.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController(
+        IAuthService authService
+    ) : ControllerBase
     {
-        private readonly IAuthService _authService;
+        private readonly IAuthService _authService = authService;
 
-        public AuthController(
-            IAuthService authService
-        )
-        {
-            _authService = authService;
-        }
+        #region POST
 
         [HttpPost("connexion")]
         public async Task<IActionResult> ConnexionUtilisateur([FromBody] UtilisateurRequest utilisateurRequest)
@@ -58,13 +44,21 @@ namespace Projet.Controllers
             }
         }
 
+        #endregion
+
+        #region GET
+
         [HttpGet("isAdmin/{id}")]
-        public async Task<ActionResult<bool>> IsAdmin([FromRoute] int? id)
+        public async Task<ActionResult<bool>> IsAdmin([FromRoute] int id)
         {
             bool isAdmin;
             try
             {
                 isAdmin = await _authService.IsAdmin(id);
+            }
+            catch (KeyNotFoundException e)
+            {
+                return NotFound(e.Message);
             }
             catch (Exception e)
             {
@@ -72,5 +66,7 @@ namespace Projet.Controllers
             }
             return Ok(isAdmin);
         }
+
+        #endregion
     }
 }

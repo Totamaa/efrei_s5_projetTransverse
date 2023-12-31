@@ -5,12 +5,12 @@ namespace Projet.Models.DTO.Request;
 public class CreatePreuveRequest(
     int dossierId,
     int typePreuveId,
-    string? contenu = null
+    string contenu
 )
 {
     public int DossierId { get; set; } = dossierId;
     public int TypePreuveId { get; set; } = typePreuveId;
-    public string? Contenu { get; set; } = contenu;
+    public string Contenu { get; set; } = contenu;
 
     public PreuveEntity ToEntity()
     {

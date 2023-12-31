@@ -5,6 +5,9 @@ namespace Projet.Services.Interfaces;
 
 public interface IAuthService
 {
+    #region GET
     Task<bool> ConnexionUtilisateur(UtilisateurRequest utilisateurRequest);
     Task<bool> IsAdmin(int? idUtilisateur);
+    
+    #endregion
 }

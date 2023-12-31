@@ -17,16 +17,13 @@ namespace Projet.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TypePreuveController : ControllerBase
+    public class TypePreuveController(
+        ITypePreuveBusinessService typePreuveBusinessService
+    ) : ControllerBase
     {
-        private readonly ITypePreuveBusinessService _typePreuveBusinessService;
+        private readonly ITypePreuveBusinessService _typePreuveBusinessService = typePreuveBusinessService;
 
-        public TypePreuveController(
-            ITypePreuveBusinessService typePreuveBusinessService
-        )
-        {
-            _typePreuveBusinessService = typePreuveBusinessService;
-        }
+        #region GET
 
         [HttpGet("all")]
         public async Task<ActionResult<IList<TypePreuveResponse>>> GetAll()
@@ -43,5 +40,6 @@ namespace Projet.Controllers
             return Ok(typePreuves);
         }
         
+        #endregion
     }
 }

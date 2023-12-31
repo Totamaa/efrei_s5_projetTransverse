@@ -7,19 +7,13 @@ namespace Projet.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PreuveController : ControllerBase
+    public class PreuveController(
+        IPreuveBusinessService preuveBusinessService
+    ) : ControllerBase
     {
-        private readonly IPreuveBusinessService _preuveBusinessService;
+        private readonly IPreuveBusinessService _preuveBusinessService = preuveBusinessService;
 
-        public PreuveController(
-            IPreuveBusinessService preuveBusinessService
-        )
-        {
-            _preuveBusinessService = preuveBusinessService;
-        }
-
-
-        /***** CREATE *****/
+        #region POST
 
         [HttpPost("create")]
         public async Task<ActionResult<int>> CreatePreuve([FromBody] CreatePreuveRequest createPreuveRequest)
@@ -44,12 +38,14 @@ namespace Projet.Controllers
             return CreatedAtAction(nameof(GetPreuveById), new {id = preuveId}, null);
         }
 
-        /***** GET *****/
+        #endregion
+
+        #region GET
 
         // by id
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<PreuveResponse>> GetPreuveById([FromRoute] int? id)
+        public async Task<ActionResult<PreuveResponse>> GetPreuveById([FromRoute] int id)
         {
             PreuveResponse preuve;
             try
@@ -72,7 +68,7 @@ namespace Projet.Controllers
         }
 
         [HttpGet("andType/{id}")]
-        public async Task<ActionResult<PreuveAndTypeResponse>> GetPreuveAndTypeById([FromRoute] int? id)
+        public async Task<ActionResult<PreuveAndTypeResponse>> GetPreuveAndTypeById([FromRoute] int id)
         {
             PreuveAndTypeResponse preuveAndType;
             try
@@ -97,7 +93,7 @@ namespace Projet.Controllers
         // by dossier id
 
         [HttpGet("dossier/{dossierId}")]
-        public async Task<ActionResult<IList<PreuveResponse>>> GetPreuveByDossierId([FromRoute] int? dossierId)
+        public async Task<ActionResult<IList<PreuveResponse>>> GetPreuveByDossierId([FromRoute] int dossierId)
         {
             IList<PreuveResponse> preuves;
             try
@@ -120,7 +116,7 @@ namespace Projet.Controllers
         }
 
         [HttpGet("andType/dossier/{dossierId}")]
-        public async Task<ActionResult<IList<PreuveAndTypeResponse>>> GetPreuveAndTypeByDossierId([FromRoute] int? dossierId)
+        public async Task<ActionResult<IList<PreuveAndTypeResponse>>> GetPreuveAndTypeByDossierId([FromRoute] int dossierId)
         {
             IList<PreuveAndTypeResponse> preuvesAndType;
             try
@@ -146,7 +142,7 @@ namespace Projet.Controllers
         // by type preuve id
 
         [HttpGet("typePreuve/{typePreuveId}")]
-        public async Task<ActionResult<IList<PreuveResponse>>> GetPreuveByTypePreuveId([FromRoute] int? typePreuveId)
+        public async Task<ActionResult<IList<PreuveResponse>>> GetPreuveByTypePreuveId([FromRoute] int typePreuveId)
         {
             IList<PreuveResponse> preuves;
             try
@@ -200,10 +196,12 @@ namespace Projet.Controllers
             return Ok(preuvesAndType);
         }
 
-        /***** UPDATE *****/
+        #endregion
+
+        #region PATCH
 
         [HttpPatch("updateContenu/{id}")]
-        public async Task<ActionResult<bool>> UpdatePreuveContenu([FromRoute] int? id, [FromBody] string? nouveauContenu)
+        public async Task<ActionResult<bool>> UpdatePreuveContenu([FromRoute] int id, [FromBody] string nouveauContenu)
         {
             bool preuveUpdated;
             try
@@ -226,10 +224,12 @@ namespace Projet.Controllers
             return Ok(preuveUpdated);
         }
 
-        /***** DELETE *****/
+        #endregion
+        
+        #region DELETE
 
         [HttpDelete("delete/{id}")]
-        public async Task<ActionResult<bool>> Delete([FromRoute] int? id)
+        public async Task<ActionResult<bool>> Delete([FromRoute] int id)
         {
             bool preuveDeleted;
             try
@@ -251,6 +251,7 @@ namespace Projet.Controllers
             return NoContent();
         }
 
+        #endregion
 
     }
 }
